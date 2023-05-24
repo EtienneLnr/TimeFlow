@@ -1,0 +1,61 @@
+defaults:
+  - _self_
+  - data: null
+  - optim: null
+  - inr: null
+
+data:
+  dir: 
+  dataset_name: 
+  data_to_encode:
+  ntrain : 
+  ntest : 
+  sub_tr : 1
+  sub_te : 1
+  seed: 123
+  same_grid: True
+  sequence_length: 20
+  draw_ratio: 0.5
+  length_of_interest: 5000
+  version: 1
+  train_ratio: 0.5
+  horizon: 96
+  look_back_window: 512
+  sample_ratio: 0.50
+  ratio_observed: 0.50
+  ratio_dense: 0.50
+  window_size: 1000
+
+optim:
+  batch_size: 32
+  batch_size_val: 
+  lr_inr : 5e-4
+  gamma_step : 0.9
+  lr_code : 0.01
+  meta_lr_code : 0
+  weight_decay: 0
+  weight_decay_code: 0
+  inner_steps : 3
+  test_inner_steps : 3
+  epochs : 10000
+  sample_ratio_batch: 1.0
+
+inr:
+  model_type : "fourier_features"
+  latent_dim : 64
+  depth : 4
+  hidden_dim : 64
+  num_frequencies : 64
+  modulate_scale: False
+  modulate_shift: True
+  frequency_embedding: nerf
+  max_frequencies: 10
+  min_frequencies: 0.
+  base_frequency: 2
+  include_input: True
+  scale: 5
+  w_passed: 0.5
+  w_futur: 0.5
+  passed_ratio: 0.3
+  horizon_ratio: 0.3
+  log_sampling: True
