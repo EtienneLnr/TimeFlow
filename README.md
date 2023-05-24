@@ -1,6 +1,6 @@
 # Repository for the paper : "Time Series Continuous Modeling for Imputation and Forecasting with Implicit Neural Representations"
 
-<img src="INR_explain.png" alt="" width="35%" height="35%">
+<img src="INR_explain.png" alt="" width="50%" height="50%">
 
 ## Folders and files overview
 
