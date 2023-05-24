@@ -6,7 +6,7 @@
 
 - data folder: Contains a small subpart of the Electricity dataset specifically prepared for classical imputation and forecasting experiments.
 - experiments folder: Includes the necessary files for training the models and performing inference for both imputation and forecasting tasks.
-- save_models folder: Serves as a storage location for saving the trained models once they have been trained.
+- save_models folder: Serves as a storage location for saving the trained models.
 - src folder: Contains the network architecture and the metalearning procedure required for the experiments.
 
 ## How to run the experiments 
@@ -24,9 +24,9 @@ First, you should go to the experiments folder, then, it depends if  you want to
     - Recommendation: Keep other parameters the same as proposed in the appendix.
 4. Run the file using the command: $bash inr_imputation.sh (GPU usage is strongly encouraged for faster training).
 5. Once the model is trained, it will be saved in the save_models folder.
-6. To perform inference, go to the inference folder and open the "inference_forecast.sh" file.
+6. To perform inference, go to the inference folder and open the "inference_imputation.sh" file.
 7. Set the appropriate parameters used for training (dataset name, draw_ratio, epochs, version).
-8. Run the file using the command: $bash inference_imputation.sh, and the forecast MAE score will be displayed
+8. Run the file using the command: $bash inference_imputation.sh, and the imputation MAE score will be displayed
 
 ### Forecast experiment
 
