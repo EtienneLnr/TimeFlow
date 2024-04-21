@@ -223,20 +223,6 @@ def fixed_sampling_series_imputations(dataset_name,
         grid = dico['grid']
         series = dico['data']
 
-
-    elif setting == 'train_test':
-
-        if train_or_test == 'train' or train_or_test == 'test':
-
-            RESULTS_DIR = DIR + 'Train_test_framework/X_subsampling_version_' + str(version) 
-            FILE_NAME =  RESULTS_DIR + '/X_' + train_or_test + '_complete.pt'
-            dico = torch.load(FILE_NAME, map_location=torch.device('cpu'))
-            grid = dico['grid']
-            series = dico['data']
-
-        else:
-            'not supported value'
-
     else:
         print("not supported setting")
 
@@ -279,23 +265,6 @@ def fixed_sampling_series_forecasting(dataset_name,
         grid = dico_passed['grid']
         series_passed = dico_passed['X_passed']
         series_target = dico_target['X_target']
-
-    elif setting == 'train_test':
-
-        if train_or_test == 'train' or train_or_test == 'test':
-
-            RESULTS_DIR = DIR + 'Train_test_framework/X_forecasting_version_' + str(version)
-            FILE_NAME_PASSED =  RESULTS_DIR + '/X_passed_horizon_' + train_or_test + '_' + str(horizon) + '.pt'
-            FILE_NAME_TARGET =  RESULTS_DIR + '/X_target_horizon_' + train_or_test +  '_' + str(horizon) + '.pt'
-            dico_passed = torch.load(FILE_NAME_PASSED, map_location=torch.device('cpu'))
-            dico_target = torch.load(FILE_NAME_TARGET, map_location=torch.device('cpu'))
-
-            grid = dico_passed['grid']
-            series_passed = dico_passed['X_passed']
-            series_target = dico_target['X_target']
-
-        else:
-            'not supported value'
 
     else:
         print("not supported setting")
