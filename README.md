@@ -1,4 +1,4 @@
-# Repository for the paper : "Time Series Continuous Modeling for Imputation and Forecasting with Implicit Neural Representations" published in TMLR
+# Repository for the paper : "Time Series Continuous Modeling for Imputation and Forecasting with Implicit Neural Representations" published in TMLR 2024
 
 <img src="INR_explain.png" alt="" width="50%" height="50%">
 
