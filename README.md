@@ -4,7 +4,7 @@
 
 ## Folders and files overview
 
-- data folder: Contains a small subpart of the Electricity dataset specifically prepared for classical imputation and forecasting experiments.
+- data folder: Contains a small subpart of the Electricity dataset specifically prepared for classical imputation and forecasting experiments. If you want to apply TimeFlow to other datasets, the input data must have the same structure as the tensors in the Electricity folder (value/gridpoint pairs with the gridpoint between 0 and 1, etc.).
 - experiments folder: Includes the necessary files for training the models and performing inference for both imputation and forecasting tasks.
 - save_models folder: Serves as a storage location for saving the trained models.
 - src folder: Contains the network architecture and the metalearning procedure required for the experiments.
