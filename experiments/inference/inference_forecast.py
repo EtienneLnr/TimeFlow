@@ -11,6 +11,7 @@ from torch.utils.data import DataLoader
 from omegaconf import DictConfig, OmegaConf
 import argparse 
 from sklearn.metrics import mean_absolute_error as mae
+from sklearn.preprocessing import StandardScaler
 
 
 #Custom imports
