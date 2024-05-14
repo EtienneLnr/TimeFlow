@@ -116,7 +116,10 @@ n_samples = series_target.shape[0]
 
 grid_p = grid_p.to(device)
 grid_h = grid_h.to(device)
-series_p = series_p.to(device)
+scaler = StandardScaler()
+scaler.fit(series_p[:,:,0].transpose(1,0))
+series_p = scaler.transform(series_p[:,:,0].transpose(1,0))
+series_p = torch.tensor(series_p).float().transpose(1,0).unsqueeze(-1).to(device)
 series_h = series_h.to(device)
                     
 outputs = outer_step(

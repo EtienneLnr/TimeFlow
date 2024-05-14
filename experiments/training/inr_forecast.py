@@ -10,6 +10,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch.optim.lr_scheduler import CosineAnnealingLR
+from sklearn.preprocessing import StandardScaler
 
 #Custom imports
 from src.metalearning.metalearning_forecasting import outer_step
@@ -115,8 +116,12 @@ def main(cfg: DictConfig) -> None:
 
         for substep, (series_p, series_h, modulations, coords_p, coords_h, idx) in enumerate(train_loader):
             inr.train()
-            series_p = series_p.to(device)
-            series_h = series_h.to(device)
+            scaler = StandardScaler()
+            scaler.fit(series_p[:,:,0].transpose(1,0))
+            series_p = scaler.transform(series_p[:,:,0].transpose(1,0))
+            series_h = scaler.transform(series_h[:,:,0].transpose(1,0))
+            series_p = torch.tensor(series_p).float().transpose(1,0).unsqueeze(-1).to(device)
+            series_h = torch.tensor(series_h).float().transpose(1,0).unsqueeze(-1).to(device)
             modulations = modulations.to(device)
             coords_p = coords_p.to(device)
             coords_h = coords_h.to(device)
