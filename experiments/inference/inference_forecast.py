@@ -148,6 +148,7 @@ fit = inr.modulated_forward(grid_p, modulations)
 mae_loss_fit = mae(fit[:,:,0].cpu().detach().numpy(), series_p[:,:,0].cpu().detach().numpy())
 
 forecast_train = inr.modulated_forward(grid_h, modulations)
+forecast_train = torch.tensor(scaler.inverse_transform(forecast_train[..., 0].transpose(1,0).cpu().numpy())).transpose(1,0)
 mae_error_forecast = mae(series_h[:,:,0].cpu().detach().numpy(), forecast_train[:,:,0].cpu().detach().numpy())
 
 print('Dataset', dataset_name)
