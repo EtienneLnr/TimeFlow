@@ -1,0 +1,6 @@
+hydra-core
+numpy
+torch
+scikit-learn
+
+

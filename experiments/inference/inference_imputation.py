@@ -42,7 +42,7 @@ version = args.version
 test_inner_steps = args.test_inner_steps
 
 
-RESULTS_DIR = str(Path(__file__).parents[2]) + '/save_models/'
+RESULTS_DIR = str(Path(__file__).parents[2]) + '/save_models'
 
 
 inr_training_input = torch.load(f"{RESULTS_DIR}/models_imputation_{dataset_name}_{draw_ratio}_{epochs}_{version}.pt",
