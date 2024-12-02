@@ -74,7 +74,7 @@ def main(cfg: DictConfig) -> None:
 
     train_loader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True)
     ntrain = series_passed.shape[0]
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    device = torch.device('cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')
     input_dim = 1
 
     inr = ModulatedFourierFeatures(
