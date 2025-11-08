@@ -25,24 +25,24 @@ This repository provides:
 
 ```bash 
 TimeFlow/
-├── data/                # Example datasets (Electricity subset for demo)
-│   ├── Imputation/      # Data for imputation experiments
-│   └── Forecasting/     # Data for forecasting experiments
+├── data/                       # Example datasets (Electricity subset for demo)
+│   ├── Imputation/             # Data for imputation experiments
+│   └── Forecasting/            # Data for forecasting experiments
 │
-├── experiments/         # Experiment scripts and configurations
-│   ├── training/        # Training scripts (.py and .sh)
-│   ├── inference/       # Inference scripts (.py and .sh)
-│   └── config/          # Experiment configuration (YAML)
+├── experiments/                # Experiment scripts and configurations
+│   ├── training/               # Training scripts (.py and .sh)
+│   ├── inference/              # Inference scripts (.py and .sh)
+│   └── config/                 # Experiment configuration (YAML)
 │
-├── src/                 # Core source code
-│   ├── network.py       # INR architecture
-│   ├── film_conditionning.py
-│   ├── utils.py
-│   └── metalearning/    # Meta-learning losses and algorithms
+├── src/                        # Core source code
+│   ├── network.py              # INR architecture
+│   ├── film_conditionning.py   # Modulation mechanisms
+│   ├── utils.py                # Utile functions 
+│   └── metalearning/           # Meta-learning losses and algorithms
 │
-├── save_models/         # Saved trained models
-├── requirements.txt     # Dependencies
-├── INR_explain.png      # Model illustration
+├── save_models/                # Saved trained models
+├── requirements.txt            # Dependencies
+├── INR_explain.png             # Model illustration
 └── README.md
 ```
 
