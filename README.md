@@ -53,7 +53,7 @@ TimeFlow/
 All experiments are run via shell scripts located in the `experiments/` folder.  
 **GPU usage is strongly recommended** for faster training.
 
-### 🔧 Imputation  
+### Imputation  
 
 **Goal:** Fill missing values in irregularly sampled time series.  
 
@@ -72,9 +72,9 @@ sbatch inr_imputation.sh
 ```
 
 #### Adjustable parameters:
-- draw_ratio ∈ {0.05, 0.10, 0.20, 0.30, 0.50} – percentage of observed 
-- data version ∈ {0, 1} – dataset version
-- Tip: Lower draw_ratio allows for higher sample_ratio_batch (faster training).
+- `draw_ratio ∈ {0.05, 0.10, 0.20, 0.30, 0.50}` – percentage of observed 
+- `data version ∈ {0, 1}` – dataset version
+- *Tip*: Lower draw_ratio allows for higher sample_ratio_batch (faster training).
   
 The trained model will be saved in `save_models/`.
 
@@ -92,7 +92,7 @@ cd ../inference
 sbatch inference_imputation.sh
 ```
 
-### 🔮 Forecasting
+### Forecasting
 **Goal:** Predict future values of a time series given its past observations.
 
 #### Training  
@@ -110,9 +110,9 @@ sbatch inr_forecast.sh
 ```
 
 #### Adjustable parameters:
-- horizon ∈ {96, 192, 336, 720} – forecasting horizon
-- version ∈ {0, 1} – dataset version
-- Tip: For long horizons, you can decrease horizon_ratio to speed up training
+- `horizon ∈ {96, 192, 336, 720}` – forecasting horizon
+- `version ∈ {0, 1}` – dataset version
+- *Tip*: For long horizons, you can decrease horizon_ratio to speed up training
 
 #### Inference  
 
