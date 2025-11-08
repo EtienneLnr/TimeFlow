@@ -1,44 +1,161 @@
-# Repository for the paper : "Time Series Continuous Modeling for Imputation and Forecasting with Implicit Neural Representations" published in TMLR 2024
+# TimeFlow – Continuous Time Series Modeling with Implicit Neural Representations  
 
-<img src="INR_explain.png" alt="" width="50%" height="50%">
+**Paper:** “Time Series Continuous Modeling for Imputation and Forecasting with Implicit Neural Representations”  
+📄 Published in **TMLR 2024**
 
-## Folders and files overview
+<p align="center">
+  <img src="INR_explain.png" alt="INR Explanation" width="40%">
+</p>
 
-- data folder: Contains a small subpart of the Electricity dataset specifically prepared for classical imputation and forecasting experiments. If you want to apply TimeFlow to other datasets, the input data must have the same structure as the tensors in the Electricity folder (value/gridpoint pairs with the gridpoint between 0 and 1, etc.).
-- experiments folder: Includes the necessary files for training the models and performing inference for both imputation and forecasting tasks.
-- save_models folder: Serves as a storage location for saving the trained models.
-- src folder: Contains the network architecture and the metalearning procedure required for the experiments.
+---
 
-## How to run the experiments 
+## 1. Overview  
 
-First, you should go to the experiments folder, then, it depends if  you want to run an imputation experiment or forecast experiment.
+**TimeFlow** is a **time-continuous neural model** for **time series imputation and forecasting**.  
+It leverages **Implicit Neural Representations (INRs)** and a **meta-learning framework** to model complex temporal dynamics without discretization constraints.
 
-### Imputation experiment
+This repository provides:
+1. The full implementation of the model described in the TMLR 2024 paper.  
+2. Scripts for **imputation**, and **forecasting** experiments.  
+3. Datasets example.
 
-1. Navigate to the training folder.
-2. Open the file "inr_imputation.sh".
-3. Choose the desired parameters for training:
-    - Select the "draw_ratio" from the options: {0.05, 0.10, 0.20, 0.30, 0.50}.
-    - Choose the "version" from the options: {0, 1}.
-    - Note: Lower "draw_ratio" values allow for increasing the "sample_ratio_batch" ratio to speed up training.
-    - Recommendation: Keep other parameters the same as proposed in the appendix.
-4. Run the file using the command: $bash inr_imputation.sh (GPU usage is strongly encouraged for faster training).
-5. Once the model is trained, it will be saved in the save_models folder.
-6. To perform inference, go to the inference folder and open the "inference_imputation.sh" file.
-7. Set the appropriate parameters used for training (dataset name, draw_ratio, epochs, version).
-8. Run the file using the command: $bash inference_imputation.sh, and the imputation MAE score will be displayed
+---
 
-### Forecast experiment
+## 2. Repository Structure  
 
-1. Navigate to the training folder.
-2. Open the file "inr_forecast.sh".
-3. Choose the desired parameters for training:
-    - Select the "horizon" from the options: {96, 192, 336, 720}.
-    - Choose the "version" from the options: {0, 1}.
-    - Note: Higher "horizon" values allow for decreasing the "horizon_ratio" ratio to speed up training.
-    - Recommendation: Keep other parameters the same as proposed in the appendix.
-4. Run the file using the command: $bash inr_forecast.sh (GPU usage is strongly encouraged for faster training).
-5. Once the model is trained, it will be saved in the save_models folder.
-6. To perform inference, navigate to the inference folder and open the "inference_forecast.sh" file.
-7. Set the appropriate parameters used for training (dataset name, horizon, epochs, version).
-8. Run the file using the command: $bash inference_forecast.sh, and the forecast MAE score will be displayed.
+```bash 
+TimeFlow/
+├── data/                # Example datasets (Electricity subset for demo)
+│   ├── Imputation/      # Data for imputation experiments
+│   └── Forecasting/     # Data for forecasting experiments
+│
+├── experiments/         # Experiment scripts and configurations
+│   ├── training/        # Training scripts (.py and .sh)
+│   ├── inference/       # Inference scripts (.py and .sh)
+│   └── config/          # Experiment configuration (YAML)
+│
+├── src/                 # Core source code
+│   ├── network.py       # INR architecture
+│   ├── film_conditionning.py
+│   ├── utils.py
+│   └── metalearning/    # Meta-learning losses and algorithms
+│
+├── save_models/         # Saved trained models
+├── requirements.txt     # Dependencies
+├── INR_explain.png      # Model illustration
+└── README.md
+```
+
+---
+
+## 3. Running Experiments  
+
+All experiments are run via shell scripts located in the `experiments/` folder.  
+**GPU usage is strongly recommended** for faster training.
+
+### 🔧 Imputation  
+
+**Goal:** Fill missing values in irregularly sampled time series.  
+
+#### Training  
+
+- Without Slurm
+```bash 
+cd experiments/training
+bash inr_imputation.sh
+```
+
+- With Slurm
+```bash 
+cd experiments/training
+sbatch inr_imputation.sh
+```
+
+#### Adjustable parameters:
+- draw_ratio ∈ {0.05, 0.10, 0.20, 0.30, 0.50} – percentage of observed 
+- data version ∈ {0, 1} – dataset version
+- Tip: Lower draw_ratio allows for higher sample_ratio_batch (faster training).
+  
+The trained model will be saved in `save_models/`.
+
+#### Inference  
+
+- Without Slurm
+```bash 
+cd ../inference
+bash inference_imputation.sh
+```
+
+- With Slurm
+```bash 
+cd ../inference
+sbatch inference_imputation.sh
+```
+
+### 🔮 Forecasting
+**Goal:** Predict future values of a time series given its past observations.
+
+#### Training  
+
+- Without Slurm
+```bash 
+cd experiments/training
+bash inr_forecast.sh
+```
+
+- With Slurm
+```bash 
+cd experiments/training
+sbatch inr_forecast.sh
+```
+
+#### Adjustable parameters:
+- horizon ∈ {96, 192, 336, 720} – forecasting horizon
+- version ∈ {0, 1} – dataset version
+- Tip: For long horizons, you can decrease horizon_ratio to speed up training
+
+#### Inference  
+
+- Without Slurm
+```bash 
+cd ../inference
+bash inference_forecast.sh
+```
+
+- With Slurm
+```bash 
+cd ../inference
+sbatch inference_forecast.sh
+```
+
+## 4. Data Format
+
+The `data/` folder includes a subset of the **Electricity dataset**, preprocessed for the paper’s experiments.
+If you wish to apply *TimeFlow* to your own data, ensure your tensors match the same structure:
+- Inputs structured as *(value, gridpoint)* pairs
+- Gridpoints scaled to the range [0, 1]
+
+## 5. Dependencies
+
+```bash 
+pip install -r requirements.txt
+```
+
+## 6. Citation
+
+If you use this work in your research, please cite the paper:
+
+
+```bibtex 
+@article{le2024timeflow,
+  title={Time Series Continuous Modeling for Imputation and Forecasting with Implicit Neural Representations},
+  author={Le Naour, Etienne and Serrano, Louis and Migus, Léon and Yin, Yuan and Agoua, Ghislain and Baskiotis, Nicolas and Gallinari, Patrick and Guigue, Vincent},
+  journal={Transactions on Machine Learning Research (TMLR)},
+  year={2024}
+}
+```
+
+## 7. Contact
+
+📧 Etienne Le Naour — etienne.le-naour@edf.fr
+If you find this repository useful, please consider starring ⭐ the repo or citing our work!
